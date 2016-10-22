@@ -1,17 +1,11 @@
-<p align="center">
-  <a href="https://carbon.qas.im"><img src="https://carbon.qas.im/assets/img/github_header.png" alt="Carbon @ Wilfrid Laurier University" width="526" /></a>
-</p>
+<h2 align="center">Carbon - Open Data API<h2>
+
+<br />
 
 <p align="center">
   Open data APIs for interfacing with public information from Wilfrid Laurier University.
 </p>
 
-<p align="center">
-  <a href="https://www.npmjs.com/package/carbon-uoft"><img src="https://badge.fury.io/js/carbon-uoft.svg" alt="npm version"></a>
-  <a href="https://travis-ci.org/carbon-uoft/carbon"><img src="https://travis-ci.org/carbon-uoft/carbon.svg?branch=master" alt="Build Status"></a>
-  <a href="https://coveralls.io/github/carbon-uoft/carbon?branch=master"><img src="https://coveralls.io/repos/github/carbon-uoft/carbon/badge.svg?branch=master" alt="Coverage Status"></a>
-  <a href="https://gitter.im/carbon-uoft/carbon?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge"><img src="https://badges.gitter.im/carbon-uoft/carbon.svg" alt="Join the chat at https://gitter.im/carbon-uoft/carbon"></a>
-</p>
 <br />
 
 ## Documentation
