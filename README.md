@@ -1,4 +1,4 @@
-<h2 align="center">Carbon - Open Data API<h2>
+<h1 align="center">Carbon - Open Data API</h1>
 
 <br />
 
