@@ -2,7 +2,7 @@ import test from 'ava'
 import testData from './testData.json'
 import request from 'supertest'
 
-import cobalt from '../../src/index'
+import carbon from '../../src/index'
 import Course from '../../src/api/courses/model'
 
 test.cb.before('setup', t => {
@@ -20,7 +20,7 @@ test.cb.before('setup', t => {
 /* list tests */
 
 test.cb('/', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/courses')
     .expect('Content-Type', /json/)
     .expect(200)
@@ -33,7 +33,7 @@ test.cb('/', t => {
 })
 
 test.cb('/', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/course/')
     .expect('Content-Type', /json/)
     .expect(404)
@@ -45,7 +45,7 @@ test.cb('/', t => {
 })
 
 test.cb('/?limit=0', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/courses?limit=0')
     .expect('Content-Type', /json/)
     .expect(400)
@@ -57,7 +57,7 @@ test.cb('/?limit=0', t => {
 })
 
 test.cb('/?limit=2', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/courses?limit=2')
     .expect('Content-Type', /json/)
     .expect(200)
@@ -70,7 +70,7 @@ test.cb('/?limit=2', t => {
 })
 
 test.cb('/?limit=200', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/courses?limit=200')
     .expect('Content-Type', /json/)
     .expect(400)
@@ -82,7 +82,7 @@ test.cb('/?limit=200', t => {
 })
 
 test.cb('/?skip=10', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/courses?skip=10')
     .expect('Content-Type', /json/)
     .expect(200)
@@ -95,7 +95,7 @@ test.cb('/?skip=10', t => {
 })
 
 test.cb('/?skip=-5', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/courses?skip=-5')
     .expect('Content-Type', /json/)
     .expect(400)
@@ -107,7 +107,7 @@ test.cb('/?skip=-5', t => {
 })
 
 test.cb('/?skip=200', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/courses?skip=200')
     .expect('Content-Type', /json/)
     .expect(200)
@@ -120,7 +120,7 @@ test.cb('/?skip=200', t => {
 })
 
 test.cb('/?skip=2&limit=2', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/courses?skip=2&limit=2')
     .expect('Content-Type', /json/)
     .expect(200)
@@ -135,7 +135,7 @@ test.cb('/?skip=2&limit=2', t => {
 /* show tests */
 
 test.cb(`/${testData[0].id}`, t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get(`/1.0/courses/${testData[0].id}`)
     .expect('Content-Type', /json/)
     .expect(200)
@@ -148,7 +148,7 @@ test.cb(`/${testData[0].id}`, t => {
 })
 
 test.cb('/XYZ789H1F20159', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/courses/XYZ789H1F20159')
     .expect('Content-Type', /json/)
     .expect(400)
@@ -162,7 +162,7 @@ test.cb('/XYZ789H1F20159', t => {
 /* search tests */
 
 test.cb('/search?q=', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/courses/search?q=')
     .expect('Content-Type', /json/)
     .expect(400)
@@ -174,7 +174,7 @@ test.cb('/search?q=', t => {
 })
 
 test.cb('/search?q=%22recreational%20space%20and%20more%22', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/courses/search?q=%22recreational%20space%20and%20more%22')
     .expect('Content-Type', /json/)
     .expect(200)
@@ -187,7 +187,7 @@ test.cb('/search?q=%22recreational%20space%20and%20more%22', t => {
 })
 
 test.cb('/search?q=loremipsumdolorsitamet', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/courses/search?q=loremipsumdolorsitamet')
     .expect('Content-Type', /json/)
     .expect(200)
@@ -200,7 +200,7 @@ test.cb('/search?q=loremipsumdolorsitamet', t => {
 })
 
 test.cb('/search?q=kk', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/courses/search?q=kk')
     .expect('Content-Type', /json/)
     .expect(400)
@@ -214,7 +214,7 @@ test.cb('/search?q=kk', t => {
 /* filter tests */
 
 test.cb('/filter?q=', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/courses/filter?q=')
     .expect('Content-Type', /json/)
     .expect(400)
@@ -226,7 +226,7 @@ test.cb('/filter?q=', t => {
 })
 
 test.cb('/filter?q=name:%22theory%22', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/courses/filter?q=name:%22theory%22')
     .expect('Content-Type', /json/)
     .expect(200)
@@ -239,7 +239,7 @@ test.cb('/filter?q=name:%22theory%22', t => {
 })
 
 test.cb('/filter?q=level:100%20OR%20name:%22econ%22', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/courses/filter?q=level:100%20OR%20name:%22econ%22')
     .expect('Content-Type', /json/)
     .expect(200)
@@ -254,7 +254,7 @@ test.cb('/filter?q=level:100%20OR%20name:%22econ%22', t => {
 })
 
 test.cb('/filter?q=level:>=400%20AND%20department:!%22bio%22%20AND%20campus:%22UTSG%22', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/courses/filter?q=level:>=400%20AND%20department:!%22bio%22%20AND%20campus:%22UTSG%22')
     .expect('Content-Type', /json/)
     .expect(200)
@@ -270,7 +270,7 @@ test.cb('/filter?q=level:>=400%20AND%20department:!%22bio%22%20AND%20campus:%22U
 })
 
 test.cb('/filter?q=level:<100', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/courses/filter?q=level:<100')
     .expect('Content-Type', /json/)
     .expect(200)
@@ -283,7 +283,7 @@ test.cb('/filter?q=level:<100', t => {
 })
 
 test.cb('/filter?q=breadth:<=1', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/courses/filter?q=breadth:<=1')
     .expect('Content-Type', /json/)
     .expect(200)
@@ -299,7 +299,7 @@ test.cb('/filter?q=breadth:<=1', t => {
 })
 
 test.cb('/filter?q=size:15', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/courses/filter?q=size:15')
     .expect('Content-Type', /json/)
     .expect(200)
@@ -311,7 +311,7 @@ test.cb('/filter?q=size:15', t => {
 })
 
 test.cb('/filter?q=size:>5000', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/courses/filter?q=size:>5000')
     .expect('Content-Type', /json/)
     .expect(200)
@@ -326,7 +326,7 @@ test.cb('/filter?q=size:>5000', t => {
 })
 
 test.cb('/filter?q=instructor:!"D Liu"', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/courses/filter?q=instructor:!"D Liu"')
     .expect('Content-Type', /json/)
     .expect(200)
@@ -338,7 +338,7 @@ test.cb('/filter?q=instructor:!"D Liu"', t => {
 })
 
 test.cb('/filter?q=instructor:%22Brown%22', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/courses/filter?q=instructor:%22Brown%22')
     .expect('Content-Type', /json/)
     .expect(200)
@@ -350,7 +350,7 @@ test.cb('/filter?q=instructor:%22Brown%22', t => {
 })
 
 test.cb('/filter?q=location:"BA"', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/courses/filter?q=location:"BA"')
     .expect('Content-Type', /json/)
     .expect(200)
@@ -362,7 +362,7 @@ test.cb('/filter?q=location:"BA"', t => {
 })
 
 test.cb('/filter?q=duration:>"1:00"', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/courses/filter?q=duration:>"1:00"')
     .expect('Content-Type', /json/)
     .expect(200)

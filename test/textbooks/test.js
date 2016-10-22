@@ -2,7 +2,7 @@ import test from 'ava'
 import testData from './testData.json'
 import request from 'supertest'
 
-import cobalt from '../../src/index'
+import carbon from '../../src/index'
 import Textbook from '../../src/api/textbooks/model'
 
 test.cb.before('setup', t => {
@@ -20,7 +20,7 @@ test.cb.before('setup', t => {
 /* list tests */
 
 test.cb('/', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/textbooks')
     .expect('Content-Type', /json/)
     .expect(200)
@@ -33,7 +33,7 @@ test.cb('/', t => {
 })
 
 test.cb('/?limit=0', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/textbooks?limit=0')
     .expect('Content-Type', /json/)
     .expect(400)
@@ -45,7 +45,7 @@ test.cb('/?limit=0', t => {
 })
 
 test.cb('/?limit=2', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/textbooks?limit=2')
     .expect('Content-Type', /json/)
     .expect(200)
@@ -58,7 +58,7 @@ test.cb('/?limit=2', t => {
 })
 
 test.cb('/?limit=200', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/textbooks?limit=200')
     .expect('Content-Type', /json/)
     .expect(400)
@@ -70,7 +70,7 @@ test.cb('/?limit=200', t => {
 })
 
 test.cb('/?skip=10', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/textbooks?skip=10')
     .expect('Content-Type', /json/)
     .expect(200)
@@ -83,7 +83,7 @@ test.cb('/?skip=10', t => {
 })
 
 test.cb('/?skip=200', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/textbooks?skip=200')
     .expect('Content-Type', /json/)
     .expect(200)
@@ -96,7 +96,7 @@ test.cb('/?skip=200', t => {
 })
 
 test.cb('/?skip=2&limit=2', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/textbooks?skip=2&limit=2')
     .expect('Content-Type', /json/)
     .expect(200)
@@ -111,7 +111,7 @@ test.cb('/?skip=2&limit=2', t => {
 /* show tests */
 
 test.cb(`/${testData[0].id}`, t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get(`/1.0/textbooks/${testData[0].id}`)
     .expect('Content-Type', /json/)
     .expect(200)
@@ -124,7 +124,7 @@ test.cb(`/${testData[0].id}`, t => {
 })
 
 test.cb('/0002', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/textbooks/0002')
     .expect('Content-Type', /json/)
     .expect(400)
@@ -138,7 +138,7 @@ test.cb('/0002', t => {
 /* search tests */
 
 test.cb('/search?q=', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/textbooks/search?q=')
     .expect('Content-Type', /json/)
     .expect(400)
@@ -150,7 +150,7 @@ test.cb('/search?q=', t => {
 })
 
 test.cb('/search?q="Organic Chemistry"', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/textbooks/search?q=%22Organic%20Chemistry%22')
     .expect('Content-Type', /json/)
     .expect(200)
@@ -163,7 +163,7 @@ test.cb('/search?q="Organic Chemistry"', t => {
 })
 
 test.cb('/search?q=loremipsumdolorsitamet', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/textbooks/search?q=loremipsumdolorsitamet')
     .expect('Content-Type', /json/)
     .expect(200)
@@ -178,7 +178,7 @@ test.cb('/search?q=loremipsumdolorsitamet', t => {
 /* filter tests */
 
 test.cb('/filter?q=', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/textbooks/filter?q=')
     .expect('Content-Type', /json/)
     .expect(400)
@@ -190,7 +190,7 @@ test.cb('/filter?q=', t => {
 })
 
 test.cb('/filter?q=price:>330', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/textbooks/filter?q=price%3A%3E330')
     .expect('Content-Type', /json/)
     .expect(200)
@@ -205,7 +205,7 @@ test.cb('/filter?q=price:>330', t => {
 })
 
 test.cb('/filter?q=author:%22milton%22', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/textbooks/filter?q=author:%22milton%22')
     .expect('Content-Type', /json/)
     .expect(200)
@@ -218,7 +218,7 @@ test.cb('/filter?q=author:%22milton%22', t => {
 })
 
 test.cb('/filter?q=edition:<=5', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/textbooks/filter?q=edition:<=5&limit=20')
     .expect('Content-Type', /json/)
     .expect(200)
@@ -231,7 +231,7 @@ test.cb('/filter?q=edition:<=5', t => {
 })
 
 test.cb('/filter?q=edition:7', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/textbooks/filter?q=edition:7')
     .expect('Content-Type', /json/)
     .expect(200)
@@ -244,7 +244,7 @@ test.cb('/filter?q=edition:7', t => {
 })
 
 test.cb('/filter?q=course_code:%22NEW%22%20AND%20price:%3C16.50', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/textbooks/filter?q=course_code:%22NEW%22%20AND%20price:%3C16.50')
     .expect('Content-Type', /json/)
     .expect(200)
@@ -257,7 +257,7 @@ test.cb('/filter?q=course_code:%22NEW%22%20AND%20price:%3C16.50', t => {
 })
 
 test.cb('/filter?q=course_requirement:!%22required%22%20AND%20course_requirement:!%22referenced%22', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/textbooks/filter?q=course_requirement:!%22required%22%20AND%20course_requirement:!%22referenced%22')
     .expect('Content-Type', /json/)
     .expect(200)
@@ -272,7 +272,7 @@ test.cb('/filter?q=course_requirement:!%22required%22%20AND%20course_requirement
 })
 
 test.cb('/filter?q=price:%3E%3D320', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/textbooks/filter?q=price:%3E%3D320')
     .expect('Content-Type', /json/)
     .expect(200)

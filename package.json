@@ -1,5 +1,5 @@
 {
-  "name": "cobalt-uoft",
+  "name": "carbon-uoft",
   "version": "0.6.1",
   "description": "Open data APIs for interfacing with public information from the University of Toronto.",
   "main": "lib/index.js",
@@ -8,16 +8,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/cobalt-uoft/cobalt.git"
+    "url": "https://github.com/carbon-uoft/carbon.git"
   },
-  "author": "Cobalt",
+  "author": "Carbon",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/cobalt-uoft/cobalt/issues"
+    "url": "https://github.com/carbon-uoft/carbon/issues"
   },
-  "homepage": "https://cobalt.qas.im",
+  "homepage": "https://carbon.qas.im",
   "keywords": [
-    "cobalt",
+    "carbon",
     "uoft",
     "api",
     "opendata",
@@ -34,7 +34,7 @@
   "scripts": {
     "build": "rm -rf lib && ./node_modules/.bin/babel src/ -d lib/",
     "dev": "npm run build && ./bin/dev",
-    "start": "./bin/cobalt",
+    "start": "./bin/carbon",
     "lint": "eslint ./src",
     "test": "ava",
     "prepush": "npm run lint && npm test",
@@ -61,7 +61,7 @@
     ]
   },
   "bin": {
-    "cobalt": "./bin/cobalt"
+    "carbon": "./bin/carbon"
   },
   "dependencies": {
     "babel-runtime": "^6.6.1",

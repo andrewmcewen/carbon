@@ -12,9 +12,9 @@ let lastCommit  =  ''
 let db = {}
 
 db.update = (collection) => {
-  let url = `https://raw.githubusercontent.com/cobalt-uoft/datasets/master/${collection}.json`
+  let url = `https://raw.githubusercontent.com/carbon-uoft/datasets/master/${collection}.json`
   https.get(url, res => {
-    let filePath = `.cobalt_data/${collection}.json`
+    let filePath = `.carbon_data/${collection}.json`
     let stream = fs.createWriteStream(filePath, {'flags': 'w'})
 
     res.on('data', chunk => {
@@ -69,8 +69,8 @@ db.check = (callback) => {
   let options  =  {
     host: 'api.github.com',
     port: 443,
-    path: '/repos/cobalt-uoft/datasets/git/refs/heads/master',
-    headers: {'user-agent': `cobalt-uoft/${version}`}
+    path: '/repos/carbon-uoft/datasets/git/refs/heads/master',
+    headers: {'user-agent': `carbon-uoft/${version}`}
   }
 
   https.get(options, res  => {
@@ -97,9 +97,9 @@ db.check = (callback) => {
 db.syncCron = () => {
   // Make data directory if it doesn't exist
   try {
-    fs.statSync('.cobalt_data')
+    fs.statSync('.carbon_data')
   } catch(e) {
-    fs.mkdirSync('.cobalt_data')
+    fs.mkdirSync('.carbon_data')
   }
 
   // Perform sync on startup

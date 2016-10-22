@@ -40,7 +40,7 @@ node_modules
 .nyc_output
 
 # Dataset output
-.cobalt_data
+.carbon_data
 
 # Babel.js input
 src/

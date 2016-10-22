@@ -24,7 +24,7 @@ gaze('src/**/*', function(err, watcher) {
 try {
   // Run and watch dist
   nodemon({
-    script: 'bin/cobalt',
+    script: 'bin/carbon',
     ext: 'js json',
     watch: 'lib'
   })

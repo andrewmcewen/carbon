@@ -13,12 +13,12 @@ import transportation from './api/transportation'
 import cdf from './api/cdf'
 
 let test = process.argv.join().match('/ava/')
-let enableSync = process.env.COBALT_ENABLE_DB_SYNC || 'true'
+let enableSync = process.env.CARBON_ENABLE_DB_SYNC || 'true'
 
 // Database connection setup
 mongoose.Promise = global.Promise
-mongoose.connect(process.env.COBALT_MONGO_URI || 'mongodb://localhost/cobalt', err => {
-  if (err) throw new Error(`Failed to connect to MongoDB [${process.env.COBALT_MONGO_URI}]: ${err.message}`)
+mongoose.connect(process.env.CARBON_MONGO_URI || 'mongodb://localhost/carbon', err => {
+  if (err) throw new Error(`Failed to connect to MongoDB [${process.env.CARBON_MONGO_URI}]: ${err.message}`)
   if (!test) {
     winston.info('Connected to MongoDB')
   }

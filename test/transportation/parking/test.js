@@ -2,7 +2,7 @@ import test from 'ava'
 import testData from './testData.json'
 import request from 'supertest'
 
-import cobalt from '../../../src/index'
+import carbon from '../../../src/index'
 import Parking from '../../../src/api/transportation/parking/model'
 
 test.cb.before('setup', t => {
@@ -20,7 +20,7 @@ test.cb.before('setup', t => {
 /* list tests */
 
 test.cb('/', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/transportation/parking')
     .expect('Content-Type', /json/)
     .expect(200)
@@ -33,7 +33,7 @@ test.cb('/', t => {
 })
 
 test.cb('/?limit=0', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/transportation/parking?limit=0')
     .expect('Content-Type', /json/)
     .expect(400)
@@ -45,7 +45,7 @@ test.cb('/?limit=0', t => {
 })
 
 test.cb('/?limit=2', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/transportation/parking?limit=2')
     .expect('Content-Type', /json/)
     .expect(200)
@@ -58,7 +58,7 @@ test.cb('/?limit=2', t => {
 })
 
 test.cb('/?limit=200', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/transportation/parking?limit=200')
     .expect('Content-Type', /json/)
     .expect(400)
@@ -70,7 +70,7 @@ test.cb('/?limit=200', t => {
 })
 
 test.cb('/?skip=10', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/transportation/parking?skip=10')
     .expect('Content-Type', /json/)
     .expect(200)
@@ -83,7 +83,7 @@ test.cb('/?skip=10', t => {
 })
 
 test.cb('/?skip=200', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/transportation/parking?skip=200')
     .expect('Content-Type', /json/)
     .expect(200)
@@ -96,7 +96,7 @@ test.cb('/?skip=200', t => {
 })
 
 test.cb('/?skip=2&limit=2', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/transportation/parking?skip=2&limit=2')
     .expect('Content-Type', /json/)
     .expect(200)
@@ -111,7 +111,7 @@ test.cb('/?skip=2&limit=2', t => {
 /* show tests */
 
 test.cb(`/${testData[0].id}`, t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get(`/1.0/transportation/parking/${testData[0].id}`)
     .expect('Content-Type', /json/)
     .expect(200)
@@ -124,7 +124,7 @@ test.cb(`/${testData[0].id}`, t => {
 })
 
 test.cb('/0', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/transportation/parking/0')
     .expect('Content-Type', /json/)
     .expect(400)
@@ -138,7 +138,7 @@ test.cb('/0', t => {
 /* search tests */
 
 test.cb('/search?q=', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/transportation/parking/search?q=')
     .expect('Content-Type', /json/)
     .expect(400)
@@ -154,7 +154,7 @@ test.cb('/search?q=', t => {
 // filter.
 /*
 test.cb('/search?q="32 post & ring stands"', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/transportation/parking/search?q=32%20post%20%26%20ring%20stands')
     .expect('Content-Type', /json/)
     .expect(200)
@@ -168,7 +168,7 @@ test.cb('/search?q="32 post & ring stands"', t => {
 */
 
 test.cb('/search?q=loremipsumdolorsitamet', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/transportation/parking/search?q=loremipsumdolorsitamet')
     .expect('Content-Type', /json/)
     .expect(200)
@@ -183,7 +183,7 @@ test.cb('/search?q=loremipsumdolorsitamet', t => {
 /* filter tests */
 
 test.cb('/filter?q=', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/transportation/parking/filter?q=')
     .expect('Content-Type', /json/)
     .expect(400)
@@ -195,7 +195,7 @@ test.cb('/filter?q=', t => {
 })
 
 test.cb('/filter?q=lat:>=40', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/transportation/parking/filter?q=lat%3A%3E%3D40')
     .expect('Content-Type', /json/)
     .expect(200)
@@ -208,7 +208,7 @@ test.cb('/filter?q=lat:>=40', t => {
 })
 
 test.cb('/filter?q=title:"Dentistry Building"', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/transportation/parking/filter?q=title%3A%22Dentistry%20Building%22')
     .expect('Content-Type', /json/)
     .expect(200)
@@ -221,7 +221,7 @@ test.cb('/filter?q=title:"Dentistry Building"', t => {
 })
 
 test.cb('/filter?q=lng:<=-100', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/transportation/parking/filter?q=lng%3A%3C%3D-100')
     .expect('Content-Type', /json/)
     .expect(200)
@@ -234,7 +234,7 @@ test.cb('/filter?q=lng:<=-100', t => {
 })
 
 test.cb('/filter?q=lat:43.66034 AND lng:-79.38876', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/transportation/parking/filter?q=lat:43.66034 AND lng:-79.38876')
     .expect('Content-Type', /json/)
     .expect(200)
@@ -247,7 +247,7 @@ test.cb('/filter?q=lat:43.66034 AND lng:-79.38876', t => {
 })
 
 test.cb('/filter?q=lat:<1', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/transportation/parking/filter?q=lat:<1')
     .expect('Content-Type', /json/)
     .expect(200)
@@ -260,7 +260,7 @@ test.cb('/filter?q=lat:<1', t => {
 })
 
 test.cb('/filter?q=lat:>40', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/transportation/parking/filter?q=lat:>40')
     .expect('Content-Type', /json/)
     .expect(200)
@@ -273,7 +273,7 @@ test.cb('/filter?q=lat:>40', t => {
 })
 
 test.cb('/filter?q=lat:>=40', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/transportation/parking/filter?q=lat:>=40')
     .expect('Content-Type', /json/)
     .expect(200)
@@ -286,7 +286,7 @@ test.cb('/filter?q=lat:>=40', t => {
 })
 
 test.cb('/filter?q=type:!"bicycle"', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/transportation/parking/filter?q=type:!"bicycle"')
     .expect('Content-Type', /json/)
     .expect(200)

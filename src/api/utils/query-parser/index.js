@@ -227,7 +227,7 @@ class QueryParser {
   }
 
   /*
-    Convert a Cobalt time format to a number.
+    Convert a Carbon time format to a number.
   */
   static timeToNumber (value) {
     let err = new Error ('Invalid time parameter.')
@@ -255,7 +255,7 @@ class QueryParser {
   }
 
   /*
-    Parse the weekday from a Cobalt day format and verify this weekday is valid.
+    Parse the weekday from a Carbon day format and verify this weekday is valid.
    */
   static parseDay (filter) {
     let err = new Error('Invalid day parameter.')

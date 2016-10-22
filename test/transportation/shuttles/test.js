@@ -2,7 +2,7 @@ import test from 'ava'
 import testData from './testData.json'
 import request from 'supertest'
 
-import cobalt from '../../../src/index'
+import carbon from '../../../src/index'
 import Shuttle from '../../../src/api/transportation/shuttles/model'
 
 test.cb.before('setup', t => {
@@ -20,7 +20,7 @@ test.cb.before('setup', t => {
 /* list tests */
 
 test.cb('/', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/transportation/shuttles')
     .expect('Content-Type', /json/)
     .expect(200)
@@ -33,7 +33,7 @@ test.cb('/', t => {
 })
 
 test.cb('/?limit=0', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/transportation/shuttles?limit=0')
     .expect('Content-Type', /json/)
     .expect(400)
@@ -45,7 +45,7 @@ test.cb('/?limit=0', t => {
 })
 
 test.cb('/?limit=2', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/transportation/shuttles?limit=2')
     .expect('Content-Type', /json/)
     .expect(200)
@@ -58,7 +58,7 @@ test.cb('/?limit=2', t => {
 })
 
 test.cb('/?limit=200', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/transportation/shuttles?limit=200')
     .expect('Content-Type', /json/)
     .expect(400)
@@ -70,7 +70,7 @@ test.cb('/?limit=200', t => {
 })
 
 test.cb('/?skip=10', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/transportation/shuttles?skip=10')
     .expect('Content-Type', /json/)
     .expect(200)
@@ -83,7 +83,7 @@ test.cb('/?skip=10', t => {
 })
 
 test.cb('/?skip=200', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/transportation/shuttles?skip=200')
     .expect('Content-Type', /json/)
     .expect(200)
@@ -96,7 +96,7 @@ test.cb('/?skip=200', t => {
 })
 
 test.cb('/?skip=2&limit=2', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/transportation/shuttles?skip=2&limit=2')
     .expect('Content-Type', /json/)
     .expect(200)
@@ -111,7 +111,7 @@ test.cb('/?skip=2&limit=2', t => {
 /* show tests */
 
 test.cb(`/${testData[0].date}`, t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get(`/1.0/transportation/shuttles/${testData[0].date}`)
     .expect('Content-Type', /json/)
     .expect(200)
@@ -124,7 +124,7 @@ test.cb(`/${testData[0].date}`, t => {
 })
 
 test.cb('/0002', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/transportation/shuttles/0002')
     .expect('Content-Type', /json/)
     .expect(400)
@@ -136,7 +136,7 @@ test.cb('/0002', t => {
 })
 
 test.cb('/1234-56-78', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/transportation/shuttles/1234-56-78')
     .expect('Content-Type', /json/)
     .expect(400)
