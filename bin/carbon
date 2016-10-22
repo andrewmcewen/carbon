@@ -6,11 +6,11 @@ var winston = require('winston')
 // Command line arguments
 var argv = require('minimist')(process.argv.slice(2))
 var port = argv.p || argv.port || process.env.PORT || 4242
-process.env.CARBON_MONGO_URI =  argv.d || argv.databaseURI || process.env.CARBON_MONGO_URI || 'mongodb://localhost/CARBON'
+process.env.CARBON_MONGO_URI =  argv.d || argv.databaseURI || process.env.CARBON_MONGO_URI || 'mongodb://Neil:carbon-wlu@ds153735.mlab.com:53735/carbon-wlu'
 
 var help = argv.h || argv.help
 if (help) {
-  console.log('Usage: CARBON [options]')
+  console.log('Usage: carbon [options]')
   console.log('')
   console.log('Options:')
   console.log('')
@@ -20,9 +20,9 @@ if (help) {
   console.log('')
   console.log('  -d <uri>, --databaseURI <uri>')
   console.log('\tThe MongoDB URI to synchronize datasets to.')
-  console.log('\t(default: mongodb://localhost/CARBON)')
+  console.log('\t(default: mongodb://Neil:carbon-wlu@ds153735.mlab.com:53735/carbon-wlu)')
   console.log('')
-  console.log('Documentation can be found at https://CARBON.qas.im/documentation/')
+  console.log('Documentation can be found at https://carbon.qas.im/documentation/')
   process.exit(0)
 }
 
@@ -31,5 +31,5 @@ var app = require('../lib/index').Server
 
 // Start listening
 var server = app.listen(port, function() {
-  winston.info('CARBON is listening at http://localhost:' + server.address().port)
+  winston.info('Carbon is listening at http://localhost:' + server.address().port)
 })
