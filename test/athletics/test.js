@@ -2,7 +2,7 @@ import test from 'ava'
 import testData from './testData.json'
 import request from 'supertest'
 
-import cobalt from '../../src/index'
+import carbon from '../../src/index'
 import Athletics from '../../src/api/athletics/model'
 
 test.cb.before('setup', t => {
@@ -20,7 +20,7 @@ test.cb.before('setup', t => {
 /* list tests */
 
 test.cb('/', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/athletics')
     .expect('Content-Type', /json/)
     .expect(200)
@@ -33,7 +33,7 @@ test.cb('/', t => {
 })
 
 test.cb('/?limit=0', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/athletics?limit=0')
     .expect('Content-Type', /json/)
     .expect(422)
@@ -45,7 +45,7 @@ test.cb('/?limit=0', t => {
 })
 
 test.cb('/?limit=2', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/athletics?limit=2')
     .expect('Content-Type', /json/)
     .expect(200)
@@ -58,7 +58,7 @@ test.cb('/?limit=2', t => {
 })
 
 test.cb('/?limit=200', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/athletics?limit=200')
     .expect('Content-Type', /json/)
     .expect(422)
@@ -82,7 +82,7 @@ test.cb('/?limit=101', t => {
 })
 
 test.cb('/?skip=10', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/athletics?skip=10')
     .expect('Content-Type', /json/)
     .expect(200)
@@ -95,7 +95,7 @@ test.cb('/?skip=10', t => {
 })
 
 test.cb('/?skip=200', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/athletics?skip=200')
     .expect('Content-Type', /json/)
     .expect(200)
@@ -108,7 +108,7 @@ test.cb('/?skip=200', t => {
 })
 
 test.cb('/?skip=2&limit=2', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/athletics?skip=2&limit=2')
     .expect('Content-Type', /json/)
     .expect(200)
@@ -123,7 +123,7 @@ test.cb('/?skip=2&limit=2', t => {
 // /* show tests */
 
 test.cb(`/${testData[0].date}`, t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get(`/1.0/athletics/${testData[0].date}`)
     .expect('Content-Type', /json/)
     .expect(200)
@@ -136,7 +136,7 @@ test.cb(`/${testData[0].date}`, t => {
 })
 
 test.cb('/2016-04-02', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/athletics/2016-04-02')
     .expect('Content-Type', /json/)
     .expect(200)
@@ -149,7 +149,7 @@ test.cb('/2016-04-02', t => {
 })
 
 test.cb('/2018-04-02', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/athletics/2018-04-02')
     .expect('Content-Type', /json/)
     .expect(404)
@@ -163,7 +163,7 @@ test.cb('/2018-04-02', t => {
 /* filter tests */
 
 test.cb('/filter?q=', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/athletics/filter?q=')
     .expect('Content-Type', /json/)
     .expect(422)
@@ -175,7 +175,7 @@ test.cb('/filter?q=', t => {
 })
 
 test.cb('/filter?q=date:"2016-04-01"', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/athletics/filter?q=date:%222016-04-01%22')
     .expect('Content-Type', /json/)
     .expect(200)
@@ -188,7 +188,7 @@ test.cb('/filter?q=date:"2016-04-01"', t => {
 })
 
 test.cb('/filter?q=campus:"utm" AND campus:"utsc" OR campus:"utsg"', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/athletics/filter?q=campus:%22utm%22%20AND%20campus:%22utsc%22%20OR%20campus:%22utsg%22')
     .expect('Content-Type', /json/)
     .expect(200)
@@ -201,7 +201,7 @@ test.cb('/filter?q=campus:"utm" AND campus:"utsc" OR campus:"utsg"', t => {
 })
 
 test.cb('/filter?q=date:>"2016"', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/athletics/filter?q=date:%3E%222016%22')
     .expect('Content-Type', /json/)
     .expect(422)
@@ -213,7 +213,7 @@ test.cb('/filter?q=date:>"2016"', t => {
 })
 
 test.cb('/filter?q=date:<"2016"', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/athletics/filter?q=date:%3C%222016%22')
     .expect('Content-Type', /json/)
     .expect(422)
@@ -225,7 +225,7 @@ test.cb('/filter?q=date:<"2016"', t => {
 })
 
 test.cb('/filter?q=date:!"2016-05-01"', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/athletics/filter?q=date:!%222016-05-01%22')
     .expect('Content-Type', /json/)
     .expect(200)
@@ -238,7 +238,7 @@ test.cb('/filter?q=date:!"2016-05-01"', t => {
 })
 
 test.cb('/filter?q=date:"today"', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/athletics/filter?q=date:%22today22')
     .expect('Content-Type', /json/)
     .expect(422)
@@ -250,7 +250,7 @@ test.cb('/filter?q=date:"today"', t => {
 })
 
 test.cb('/filter?q=duration:<1800 OR duration:>38400', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/athletics/filter?q=duration:%3C1800%20OR%20duration:%3E38400')
     .expect('Content-Type', /json/)
     .expect(200)
@@ -263,7 +263,7 @@ test.cb('/filter?q=duration:<1800 OR duration:>38400', t => {
 })
 
 test.cb('/filter?q=start:"k4:00"', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/athletics/filter?q=start:%22k4:00%22')
     .expect('Content-Type', /json/)
     .expect(422)
@@ -275,7 +275,7 @@ test.cb('/filter?q=start:"k4:00"', t => {
 })
 
 test.cb('/filter?q=start:"now" AND end:"later"', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/athletics/filter?q=start:%22now%22%20AND%20end:%22later%22')
     .expect('Content-Type', /json/)
     .expect(422)
@@ -287,7 +287,7 @@ test.cb('/filter?q=start:"now" AND end:"later"', t => {
 })
 
 test.cb('/filter?q=duration:"25:00"', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/athletics/filter?q=duration:%22250:00%22')
     .expect('Content-Type', /json/)
     .expect(200)
@@ -300,7 +300,7 @@ test.cb('/filter?q=duration:"25:00"', t => {
 })
 
 test.cb('/filter?q=start:"k4:00"', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/athletics/filter?q=start:%22k4:00%22')
     .expect('Content-Type', /json/)
     .expect(422)
@@ -312,7 +312,7 @@ test.cb('/filter?q=start:"k4:00"', t => {
 })
 
 test.cb('/filter?q=start:"now" AND end:"later"', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/athletics/filter?q=start:%22now%22%20AND%20end:%22later%22')
     .expect('Content-Type', /json/)
     .expect(422)
@@ -324,7 +324,7 @@ test.cb('/filter?q=start:"now" AND end:"later"', t => {
 })
 
 test.cb('/filter?q=campus:"utm" AND date:"2016-04-03"', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/athletics/filter?q=campus:%22utm%22%20AND%20date:%222016-04-03%22')
     .expect('Content-Type', /json/)
     .expect(200)
@@ -336,7 +336,7 @@ test.cb('/filter?q=campus:"utm" AND date:"2016-04-03"', t => {
 })
 
 test.cb('/filter?q=campus:!"utm" AND date:"2016-04-03"', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/athletics/filter?q=campus:!%22UTM%22%20AND%20date:%222016-04-03%22')
     .expect('Content-Type', /json/)
     .expect(200)
@@ -348,7 +348,7 @@ test.cb('/filter?q=campus:!"utm" AND date:"2016-04-03"', t => {
 })
 
 test.cb('/filter?q=title:"rock climbing" AND date:>="2016-04-28"', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/athletics/filter?q=title:%22rock%20climbing%22%20AND%20date:%3E=%222016-04-28%22')
     .expect('Content-Type', /json/)
     .expect(200)
@@ -360,7 +360,7 @@ test.cb('/filter?q=title:"rock climbing" AND date:>="2016-04-28"', t => {
 })
 
 test.cb('/filter?q=start:>=0', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/athletics/filter?q=start:%3E=0')
     .expect('Content-Type', /json/)
     .expect(200)
@@ -372,7 +372,7 @@ test.cb('/filter?q=start:>=0', t => {
 })
 
 test.cb('/filter?q=start:<"5:30" AND date:<="2016-04-12"', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/athletics/filter?q=start:%3C%225:30%22%20AND%20date:%3C=%222016-04-12%22')
     .expect('Content-Type', /json/)
     .expect(200)
@@ -384,7 +384,7 @@ test.cb('/filter?q=start:<"5:30" AND date:<="2016-04-12"', t => {
 })
 
 test.cb('/filter?q=start:<19800 AND date:<="2016-04-12"', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/athletics/filter?q=start:%3C19800%20AND%20date:%3C=%222016-04-12%22')
     .expect('Content-Type', /json/)
     .expect(200)
@@ -396,7 +396,7 @@ test.cb('/filter?q=start:<19800 AND date:<="2016-04-12"', t => {
 })
 
 test.cb('/filter?q=duration:>=38400 AND date:>="2016-04-27"', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/athletics/filter?q=duration:%3E=38400%20AND%20date:%3E=%222016-04-27%22')
     .expect('Content-Type', /json/)
     .expect(200)
@@ -408,7 +408,7 @@ test.cb('/filter?q=duration:>=38400 AND date:>="2016-04-27"', t => {
 })
 
 test.cb('/filter?q=date:>="ABCD-EF-GH"', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/athletics/filter?q=date:>="ABCD-EF-GH"')
     .expect('Content-Type', /json/)
     .expect(422)

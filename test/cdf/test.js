@@ -1,10 +1,10 @@
 import test from 'ava'
 import request from 'supertest'
 
-import cobalt from '../../src/index'
+import carbon from '../../src/index'
 
 test.cb('/labs', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/cdf/labs')
     .expect('Content-Type', /json/)
     .expect(200)
@@ -16,7 +16,7 @@ test.cb('/labs', t => {
 })
 
 test.cb('/printers', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/cdf/printers')
     .expect('Content-Type', /json/)
     .expect(200)
@@ -28,7 +28,7 @@ test.cb('/printers', t => {
 })
 
 test.cb('/labs?path=abc.json', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/cdf/labs?path=abc.json')
     .expect('Content-Type', /json/)
     .expect(500)
@@ -40,7 +40,7 @@ test.cb('/labs?path=abc.json', t => {
 })
 
 test.cb('/labs?path=abc.json', t => {
-  request(cobalt.Server)
+  request(carbon.Server)
     .get('/1.0/cdf/printers?path=abc.json')
     .expect('Content-Type', /json/)
     .expect(500)
