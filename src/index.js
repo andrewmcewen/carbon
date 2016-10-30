@@ -17,12 +17,13 @@ let enableSync = process.env.CARBON_ENABLE_DB_SYNC || 'true'
 
 // Database connection setup
 mongoose.Promise = global.Promise
-mongoose.connect(process.env.CARBON_MONGO_URI || 'mongodb://localhost/carbon', err => {
+mongoose.connect(process.env.COBALT_MONGO_URI || 'mongodb://localhost/carbon-dev', err => {
   if (err) throw new Error(`Failed to connect to MongoDB [${process.env.CARBON_MONGO_URI}]: ${err.message}`)
   if (!test) {
     winston.info('Connected to MongoDB')
   }
 })
+
 
 // Express setup
 let app = express()

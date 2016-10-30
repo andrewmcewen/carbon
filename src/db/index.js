@@ -12,7 +12,7 @@ let lastCommit  =  ''
 let db = {}
 
 db.update = (collection) => {
-  let url = `https://raw.githubusercontent.com/carbon-uoft/datasets/master/${collection}.json`
+  let url = `https://raw.githubusercontent.com/andrewmcewen/datasets/master/${collection}.json`
   https.get(url, res => {
     let filePath = `.carbon_data/${collection}.json`
     let stream = fs.createWriteStream(filePath, {'flags': 'w'})
@@ -65,34 +65,34 @@ db.sync = () => {
   db.update('textbooks')
 }
 
-db.check = (callback) => {
-  let options  =  {
-    host: 'api.github.com',
-    port: 443,
-    path: '/repos/carbon-uoft/datasets/git/refs/heads/master',
-    headers: {'user-agent': `carbon-uoft/${version}`}
-  }
-
-  https.get(options, res  => {
-    let data = ''
-
-    res.on('data', chunk => {
-      data += chunk
-    })
-
-    res.on('end', () => {
-      data = JSON.parse(data)
-
-      // Compare the last commit hash to the current one
-      if (data.object.sha == lastCommit) return
-
-      lastCommit = data.object.sha
-
-      // Execute the callback
-      if (callback) callback()
-    })
-  })
-}
+// db.check = (callback) => {
+//   let options  =  {
+//     host: 'api.github.com',
+//     port: 443,
+//     path: '/repos/andrewmcewen/datasets/git/refs/heads/master',
+//     headers: {'user-agent': `carbon-uoft/${version}`}
+//   }
+//
+//   https.get(options, res  => {
+//     let data = ''
+//
+//     res.on('data', chunk => {
+//       data += chunk
+//     })
+//
+//     res.on('end', () => {
+//       data = JSON.parse(data)
+//
+//       // Compare the last commit hash to the current one
+//       if (data.object.sha == lastCommit) return
+//
+//       lastCommit = data.object.sha
+//
+//       // Execute the callback
+//       if (callback) callback()
+//     })
+//   })
+// }
 
 db.syncCron = () => {
   // Make data directory if it doesn't exist
@@ -105,10 +105,10 @@ db.syncCron = () => {
   // Perform sync on startup
   db.sync()
 
-  // Schedule checking for sync every hour
-  schedule.scheduleJob('0 * * * *', () => {
-    db.check(() => { db.sync() })
-  })
+//   // Schedule checking for sync every hour
+//   schedule.scheduleJob('0 * * * *', () => {
+//     db.check(() => { db.sync() })
+//   })
 }
 
 export default db
